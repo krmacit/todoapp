@@ -5,3 +5,8 @@ app:
     password: 899091
     bucket-todo: todo-app
     bucket-user: user
+
+spring:
+  data:
+    couchbase:
+      auto-index: true

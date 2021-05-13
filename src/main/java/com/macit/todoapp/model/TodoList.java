@@ -1,8 +1,10 @@
 package com.macit.todoapp.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.couchbase.core.mapping.Document;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,6 +13,8 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Document
+@Data
 public class TodoList {
 
     @Id

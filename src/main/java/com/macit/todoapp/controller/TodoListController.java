@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -17,13 +18,13 @@ public class TodoListController {
     private TodoListService todoListService;
 
     @RequestMapping(value = "/todo", method = RequestMethod.GET)
-    public ResponseEntity<Set<TodoList>> getUsers() {
+    public ResponseEntity<List<TodoList>> getUsers() {
         return new ResponseEntity<>(todoListService.getTodoLists(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/todo", method = RequestMethod.POST)
     public ResponseEntity<String> addUser(@RequestBody TodoList todoList) {
-        todoListService.addTodoList(todoList);
+        todoListService.saveTodoList(todoList);
         return new ResponseEntity<>("User " + todoList.getUserId() + " is added.", HttpStatus.OK);
     }
 
