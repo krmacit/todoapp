@@ -18,12 +18,12 @@ public class TodoListController {
     private TodoListService todoListService;
 
     @RequestMapping(value = "/todo", method = RequestMethod.GET)
-    public ResponseEntity<List<TodoList>> getUsers() {
+    public ResponseEntity<List<TodoList>> getAllTodos() {
         return new ResponseEntity<>(todoListService.getTodoLists(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/todo", method = RequestMethod.POST)
-    public ResponseEntity<String> addUser(@RequestBody TodoList todoList) {
+    public ResponseEntity<String> addTodo(@RequestBody TodoList todoList) {
         todoListService.saveTodoList(todoList);
         return new ResponseEntity<>("User " + todoList.getUserId() + " is added.", HttpStatus.OK);
     }
@@ -34,20 +34,20 @@ public class TodoListController {
         return new ResponseEntity<>("User " + id + " is removed.", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/todo/{id}/task", method = RequestMethod.GET)
-    public ResponseEntity<Set<Task>> getTasks(@PathVariable String id) {
-        return new ResponseEntity<>(todoListService.getAllTasksFromTodoList(id), HttpStatus.OK);
+    @RequestMapping(value = "/task", method = RequestMethod.GET)
+    public ResponseEntity<Set<Task>> getTasks() {
+        return new ResponseEntity<>(todoListService.getAllTasksFromTodoList(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/todo/{id}/task", method = RequestMethod.POST)
-    public ResponseEntity<String> addTask(@PathVariable String id, @RequestBody Task task) {
-        todoListService.addTaskToTodoList(id, task);
-        return new ResponseEntity<>("Task " + task.getName() + " is added.", HttpStatus.OK);
+    @RequestMapping(value = "/task", method = RequestMethod.POST)
+    public ResponseEntity<String> addTask(@RequestBody Task task) {
+        todoListService.addTaskToTodoList(task);
+        return new ResponseEntity<>("Task " + task.getText() + " is added.", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/todo/{id}/task/{taskId}", method = RequestMethod.DELETE)
-    public ResponseEntity<String> removeTask(@PathVariable String id, @PathVariable String taskId) {
-        todoListService.removeTaskFromTodoList(id, taskId);
+    @RequestMapping(value = "/task/{taskId}", method = RequestMethod.DELETE)
+    public ResponseEntity<String> removeTask(@PathVariable String taskId) {
+        todoListService.removeTaskFromTodoList(taskId);
         return new ResponseEntity<>("Task " + taskId + " is removed.", HttpStatus.OK);
     }
 

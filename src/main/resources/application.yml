@@ -10,3 +10,10 @@ spring:
   data:
     couchbase:
       auto-index: true
+  security:
+    user:
+      name: User
+      password: password
+
+server:
+  port: 3000
